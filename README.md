@@ -1,0 +1,1 @@
+Replace numerals with corresponding numbers in the given text.
