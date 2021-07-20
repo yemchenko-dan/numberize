@@ -11,7 +11,7 @@ def _replace_by_map(replacement_map: list, text: str) -> str:
     return new_text + text[prev_end:]
 
 
-def replace_numerals_with_numbers(text: str) -> str:
+def replace_numerals(text: str) -> str:
     mapper = mp.Mapper()
     replacement_map = mapper.get_replacement_map(text)
     return _replace_by_map(replacement_map, text)
