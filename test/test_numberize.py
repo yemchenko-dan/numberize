@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-import numberize.numberize as nb
+import numberize.numberizer as nb
 
 
 @dataclass
