@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/DanATW/numberize.git",
     project_urls={
-        "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
+        "Bug Tracker": "https://github.com/DanATW/numberize/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -22,4 +22,8 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(include=["numberize"]),
     python_requires=">=3.6",
+    install_requires=['pymorphy2'],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest==6.2.4'],
+    test_suite='test'
 )
