@@ -4,5 +4,6 @@ Available on [PyPI](https://pypi.org/project/numberize/).
 Consider checking out [Wiki](https://github.com/DanATW/numberize/wiki) for more info.
 
 ## Requirements
+<<<<<<< HEAD
 * python 3.6+
 * pymorphy2
