@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="numberize",
-    version="0.0.3",
+    version="0.0.4",
     author="YemchenkoDS",
     author_email="emchenko@dlit.dp.ua",
     description="Replace numerals with numbers",
@@ -20,6 +20,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    keywords='russian numerals text replace morphology numbers words',
     packages=setuptools.find_packages(include=["numberize"]),
     python_requires=">=3.6",
     install_requires=['pymorphy2'],
