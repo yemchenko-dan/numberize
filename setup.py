@@ -20,6 +20,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    keywords = 'text replace numerals words numbers morphology',
     packages=setuptools.find_packages(include=["numberize"]),
     python_requires=">=3.6",
     install_requires=['pymorphy2'],
