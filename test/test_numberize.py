@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-import numberize.numberizer as nb
+from numberize import Numberizer, Languages
+from numberize.my_types import ReplacedNumeral
 
 
 @dataclass
@@ -12,15 +13,22 @@ class QuestionMapAnswer:
 
 def test_replace_by_map():
     data_set = [
-        QuestionMapAnswer('аодопддп', [('_', 0, 5)], '_ддп'),
-        QuestionMapAnswer('аодопддп', [('_', 0, 5), (5, 6, 7)], '_д5п'),
+        QuestionMapAnswer(
+            'аодопддп', [ReplacedNumeral('_', 0, 5)], '_ддп'
+        ),
+        QuestionMapAnswer(
+            'аодопддп',
+            [ReplacedNumeral('_', 0, 5), ReplacedNumeral(5, 6, 7)],
+            '_д5п'
+        ),
     ]
+    numba = Numberizer(Languages.ru)
     for item in data_set:
-        ans = nb._replace_by_map(item.map, item.text)
+        ans = numba._replace_by_map(item.map, item.text)
         assert ans == item.out, ans
 
 
-def test_replace_numerals_with_numbers():
+def test_replace_numerals_ru():
     text_replaced = {
         'девять-восемь, тремя миллионами, шестьсот тысяч и трёх людей':
         '9-8, 3000000, 600000 и 3 людей',
@@ -31,6 +39,7 @@ def test_replace_numerals_with_numbers():
         'двадцать пять и семь': '25 и 7',
         'двадцать пять тысяч и Вася': '25000 и Вася'
     }
+    numba = Numberizer(Languages.ru)
     for text in text_replaced:
-        ans = nb.replace_numerals_with_numbers(text)
+        ans = numba.replace_numerals(text)
         assert ans == text_replaced[text], ans
