@@ -1,2 +1,2 @@
-from . import numeric_dict
-from . import tools
+from .my_types import Languages
+from .numberizer import Numberizer
