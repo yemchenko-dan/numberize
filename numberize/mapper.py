@@ -1,16 +1,32 @@
-import pymorphy2
+from analyze import Analyzer, Checker
+from my_types import ReplacedNumeral
 
-import numberize as nb
 
-morph = pymorphy2.MorphAnalyzer()
+def calculate_a_num(numbers) -> int:
+    res, group = 0, 0
+    for num in numbers:
+        if num < 1E3:
+            group += num
+            continue
+        if group != 0:
+            res += group*num
+            group = 0
+            continue
+        res += num
+    else:
+        res += group
+    return int(res)
 
 
 class Mapper:
-    def __init__(self):
+    def __init__(self, analyzer: 'Analyzer', checker: 'Checker'):
         self._replacement_map = []
         self._current_word = ''
         self._current_numeral = []
         self._start_of_numeral, self._end_of_numeral = None, None
+
+        self._morph = analyzer
+        self._check = checker
 
     def _clear(self):
         self._replacement_map = []
@@ -25,21 +41,23 @@ class Mapper:
 
     def _update_replacement_map(self) -> None:
         if self._current_numeral:
-            num_start = self._current_numeral[0][1]
-            num_end = self._current_numeral[-1][2]
-            num = nb.tools.calculate_a_num(
-                (x[0] for x in self._current_numeral)
+            num_start = self._current_numeral[0].start
+            num_end = self._current_numeral[-1].end
+            num = calculate_a_num(
+                (x.number for x in self._current_numeral)
             )
-            self._replacement_map.append((num, num_start, num_end))
+            self._replacement_map.append(
+                ReplacedNumeral(num, num_start, num_end)
+            )
             self._current_numeral = []
 
     def _update_numeral(self, end: int) -> None:
         self._end_of_numeral = end
-        parsed = morph.parse(self._current_word)[0]
-        if nb.tools.is_numeral(parsed.tag.POS, parsed.normal_form):
+        parsed = self._check.get_parsed(self._morph.parse(self._current_word))
+        if parsed:
             self._current_numeral.append(
-                (
-                    nb.numeric_dict.all_num[parsed.normal_form],
+                ReplacedNumeral(
+                    self._check.get_num(parsed.normal_form),
                     self._start_of_numeral,
                     self._end_of_numeral
                 )
@@ -51,7 +69,7 @@ class Mapper:
     def get_replacement_map(self, text: str) -> list:
         self._clear()
         for current_position, char in enumerate(text):
-            if nb.tools.is_cyrillic(char):
+            if self._check.is_cyrillic(char):
                 self._update_word(char, start=current_position)
             elif self._current_word:
                 if char.isspace():
@@ -68,3 +86,4 @@ class Mapper:
             if self._current_numeral:
                 self._update_replacement_map()
         return self._replacement_map
+
