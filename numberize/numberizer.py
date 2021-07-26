@@ -1,17 +1,24 @@
-import numberize.mapper as mp
+import mapper as mp
+
+from my_types import Languages
+from analyze import Analyzer, Checker
 
 
-def _replace_by_map(replacement_map: list, text: str) -> str:
-    new_text = ''
-    prev_end = 0
-    for item in replacement_map:
-        num, start, end = item
-        new_text += text[prev_end:start] + str(num)
-        prev_end = end
-    return new_text + text[prev_end:]
+class Numberizer:
+    def __init__(self, lang: Languages = Languages.ru):
+        self._analyzer = Analyzer(lang=lang)
+        self._checker = Checker(lang=lang)
 
+    @staticmethod
+    def _replace_by_map(replacement_map, text) -> str:
+        new_text = ''
+        prev_end = 0
+        for item in replacement_map:
+            new_text += text[prev_end:item.start] + str(item.number)
+            prev_end = item.end
+        return new_text + text[prev_end:]
 
-def replace_numerals(text: str, lang='ru') -> str:
-    mapper = mp.Mapper()
-    replacement_map = mapper.get_replacement_map(text)
-    return _replace_by_map(replacement_map, text)
+    def replace_numerals(self, text: str) -> str:
+        mapper = mp.Mapper(self._analyzer, self._checker)
+        replacement_map = mapper.get_replacement_map(text)
+        return self._replace_by_map(replacement_map, text)
