@@ -1,5 +1,5 @@
-from analyze import Analyzer, Checker
-from my_types import ReplacedNumeral
+from numberize.analyze import Analyzer, Checker
+from numberize.my_types import ReplacedNumeral
 
 
 def calculate_a_num(numbers) -> int:

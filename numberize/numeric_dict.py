@@ -1,4 +1,4 @@
-from dictionaries import dict_uk, dict_ru
+from numberize.dictionaries import dict_uk, dict_ru
 
 nums = {
     'ru': dict_ru,

@@ -1,7 +1,7 @@
-import mapper as mp
+import numberize.mapper as mp
 
-from my_types import Languages
-from analyze import Analyzer, Checker
+from numberize.my_types import Languages
+from numberize.analyze import Analyzer, Checker
 
 
 class Numberizer:

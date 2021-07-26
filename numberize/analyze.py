@@ -1,7 +1,7 @@
 import pymorphy2
 
-from my_types import Languages
-from numeric_dict import nums
+from numberize.my_types import Languages
+from numberize.numeric_dict import nums
 
 
 class Analyzer:
