@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from numberize import Numberizer, Languages
+from numberize import Numberizer
 from numberize.my_types import ReplacedNumeral
 
 
@@ -22,7 +22,7 @@ def test_replace_by_map():
             '_д5п'
         ),
     ]
-    numba = Numberizer(Languages.ru)
+    numba = Numberizer('ru')
     for item in data_set:
         ans = numba._replace_by_map(item.map, item.text)
         assert ans == item.out, ans
@@ -39,7 +39,8 @@ def test_replace_numerals_ru():
         'двадцать пять и семь': '25 и 7',
         'двадцать пять тысяч и Вася': '25000 и Вася'
     }
-    numba = Numberizer(Languages.ru)
+    numba = Numberizer('ru')
     for text in text_replaced:
         ans = numba.replace_numerals(text)
         assert ans == text_replaced[text], ans
+

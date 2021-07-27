@@ -1,13 +1,17 @@
 import numberize.mapper as mp
 
-from numberize.my_types import Languages
 from numberize.analyze import Analyzer, Checker
 
 
 class Numberizer:
-    def __init__(self, lang: Languages = Languages.ru):
-        self._analyzer = Analyzer(lang=lang)
-        self._checker = Checker(lang=lang)
+    _languages = ('ru', 'uk')
+
+    def __init__(self, lang: str = 'ru'):
+        if lang in Numberizer._languages:
+            self._analyzer = Analyzer(lang=lang)
+            self._checker = Checker(lang=lang)
+        else:
+            raise Exception(f'{lang} is not supported language')
 
     @staticmethod
     def _replace_by_map(replacement_map, text) -> str:
