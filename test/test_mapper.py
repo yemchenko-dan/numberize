@@ -1,7 +1,7 @@
 import numberize
 
 import numberize.analyze
-import numberize.mapper
+import numberize.map_text
 
 
 def test_get_replacement_map_ru():
@@ -14,7 +14,7 @@ def test_get_replacement_map_ru():
     }
     analyzer = numberize.analyze.Analyzer('ru')
     checker = numberize.analyze.Checker('ru')
-    mapper = numberize.mapper.Mapper(analyzer, checker)
+    mapper = numberize.map_text.Mapper(analyzer, checker)
     for text in text_map:
         ans = mapper.get_replacement_map(text)
         assert ans == text_map[text], ans

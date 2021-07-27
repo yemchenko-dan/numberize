@@ -5,7 +5,7 @@ from numberize.numeric_dict import nums
 
 class Analyzer:
     def __init__(self, lang: str):
-        self._morph = pymorphy2.MorphAnalyzer(lang=lang)
+        self._morph = pymorphy2.MorphAnalyzer(lang)
 
     def parse(self, word: str):
         return self._morph.parse(word)

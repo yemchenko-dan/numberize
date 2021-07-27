@@ -1,5 +1,8 @@
 from numberize.analyze import Analyzer, Checker
-from numberize.my_types import ReplacedNumeral
+from collections import namedtuple
+
+
+ReplacedNumeral = namedtuple('ReplacedNumeral', ['number', 'start', 'end'])
 
 
 def calculate_a_num(numbers) -> int:
