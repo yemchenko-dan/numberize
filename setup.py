@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="numberize",
-    version="0.1.0",
+    version="0.1.1",
     author="YemchenkoDS",
     author_email="emchenko@dlit.dp.ua",
     description="Replace numerals with numbers",
