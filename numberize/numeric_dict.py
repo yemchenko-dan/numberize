@@ -1,6 +1,7 @@
-from numberize.dictionaries import dict_uk, dict_ru
+import numberize.dict_uk
+import numberize.dict_ru
 
 nums = {
-    'ru': dict_ru,
-    'uk': dict_uk
+    'ru': numberize.dict_ru,
+    'uk': numberize.dict_uk
 }

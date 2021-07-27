@@ -1,2 +1,4 @@
 from .numberizer import Numberizer
-from . import dictionaries
+from . import dict_uk
+from . import dict_ru
+
