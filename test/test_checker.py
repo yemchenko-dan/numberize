@@ -1,24 +1,46 @@
-def test_is_cyrillic():
+from numberize.analyze import Checker, Analyzer
+
+
+def test_is_cyrillic_ru():
     char_bool = {
         'f': False,
         '.': False,
         'А': True,
-        'в': True
+        'в': True,
+        'ї': False
     }
+    checker = Checker('ru')
     for char in char_bool:
-        ans = tools.is_cyrillic(char)
-        assert ans == char_bool[char], ans
+        ans = checker.is_cyrillic(char)
+        assert ans == char_bool[char], char
 
 
-def test_is_numeral():
-    pair_bool = {
-        ('NUMR', 'fga'): True,
-        ('ADJV', 'один'): True,
-        ('NOUN', 'сто'): True,
-        ('PROV', 'тысяча'): True,
-        ('GGG', 'gasg'): False
+def test_is_cyrillic_uk():
+    char_bool = {
+        'f': False,
+        '.': False,
+        'А': True,
+        'в': True,
+        'ї': True,
+        "'": True
     }
-    for pair in pair_bool:
-        pos, normal_form = pair
-        ans = tools.is_numeral(pos, normal_form)
-        assert ans == pair_bool[pair], ans
+    checker = Checker('uk')
+    for char in char_bool:
+        ans = checker.is_cyrillic(char)
+        assert ans == char_bool[char], char
+
+
+def test_get_parsed_ru():
+    words = ('один', "сто", 'десять', 'тысяча')
+    checker = Checker('ru')
+    analyzer = Analyzer('ru')
+    for word in words:
+        assert checker.get_parsed(analyzer.parse(word))
+
+
+def test_get_parsed_uk():
+    words = ("один", "сто", "тисяча", "п'яти")
+    checker = Checker('uk')
+    analyzer = Analyzer('uk')
+    for word in words:
+        assert checker.get_parsed(analyzer.parse(word))

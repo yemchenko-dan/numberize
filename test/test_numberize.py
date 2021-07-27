@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from numberize import Numberizer
-from numberize.my_types import ReplacedNumeral
+from numberize.map_text import ReplacedNumeral
 
 
 @dataclass
