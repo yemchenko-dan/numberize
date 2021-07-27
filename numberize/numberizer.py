@@ -19,6 +19,10 @@ class Numberizer:
                  Try one of these: {Numberizer._languages}'
             )
 
+    @classmethod
+    def supported_languages(cls):
+        return cls._languages
+
     @staticmethod
     def _replace_by_map(replacement_map, text) -> str:
         new_text = ''
