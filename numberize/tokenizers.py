@@ -56,6 +56,10 @@ class UkTokenizer(Tokenizer):
 
 
 def get_tokenizer(lang: str) -> 'Tokenizer':
+    """
+    :param lang: available languages ('ru', 'uk', 'en')
+    :return: Tokenizer object
+    """
     tokenizers = {
         'ru': RuTokenizer(),
         'uk': UkTokenizer(),
