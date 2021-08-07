@@ -33,6 +33,7 @@ class UkTokenizer(Tokenizer):
         return set(word) <= allowed
 
     def _weld_apostrophes(self, tokens: list) -> list:
+        """Join words, that were split by apostrophes"""
         new_tokens = []
         i = 0
         while i < len(tokens):
