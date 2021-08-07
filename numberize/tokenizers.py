@@ -6,19 +6,19 @@ from nltk.tokenize import word_tokenize
 class Tokenizer(ABC):
     @staticmethod
     @abstractmethod
-    def tokenize(text):
+    def tokenize(text: str) -> list:
         """Splits sentences into words"""
 
 
 class EnTokenizer(Tokenizer):
     @staticmethod
-    def tokenize(text):
+    def tokenize(text: str) -> list:
         return word_tokenize(text)
 
 
 class RuTokenizer(Tokenizer):
     @staticmethod
-    def tokenize(text):
+    def tokenize(text: str) -> list:
         return word_tokenize(text, language='russian')
 
 
@@ -32,7 +32,7 @@ class UkTokenizer(Tokenizer):
         }
         return set(word) <= allowed
 
-    def _weld_apostrophes(self, tokens: list):
+    def _weld_apostrophes(self, tokens: list) -> list:
         new_tokens = []
         i = 0
         while i < len(tokens):
@@ -49,12 +49,12 @@ class UkTokenizer(Tokenizer):
             i += 1
         return new_tokens
 
-    def tokenize(self, text):
+    def tokenize(self, text: str) -> list:
         ru_tokenized = RuTokenizer.tokenize(text)
         return self._weld_apostrophes(ru_tokenized)
 
 
-def get_tokenizer(lang: str):
+def get_tokenizer(lang: str) -> 'Tokenizer':
     tokenizers = {
         'ru': RuTokenizer(),
         'uk': UkTokenizer(),
