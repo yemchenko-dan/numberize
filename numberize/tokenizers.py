@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, ToktokTokenizer
+from nltk.tokenize.treebank import TreebankWordDetokenizer
 
 
 class Tokenizer(ABC):
@@ -9,17 +10,30 @@ class Tokenizer(ABC):
     def tokenize(text: str) -> list:
         """Splits sentences into words"""
 
+    @staticmethod
+    @abstractmethod
+    def detokenize(tokens: list) -> str:
+        """Joins tokens into text"""
+
 
 class EnTokenizer(Tokenizer):
     @staticmethod
     def tokenize(text: str) -> list:
-        return word_tokenize(text)
+        return ToktokTokenizer().tokenize(text)
+
+    @staticmethod
+    def detokenize(tokens: list) -> str:
+        return TreebankWordDetokenizer().detokenize(tokens)
 
 
 class RuTokenizer(Tokenizer):
     @staticmethod
     def tokenize(text: str) -> list:
         return word_tokenize(text, language='russian')
+
+    @staticmethod
+    def detokenize(tokens: list) -> str:
+        pass
 
 
 class UkTokenizer(Tokenizer):
@@ -38,7 +52,7 @@ class UkTokenizer(Tokenizer):
         i = 0
         while i < len(tokens):
             tok = tokens[i]
-            if tok in ("’", "'") and i > 0 or i <= len(tok) - 1:
+            if tok in ("’", "'") and 0 < i <= len(tokens) - 1:
                 prev_tok = tokens[i-1]
                 next_tok = tokens[i+1]
                 if self._is_ukrainian(prev_tok) \
@@ -51,8 +65,12 @@ class UkTokenizer(Tokenizer):
         return new_tokens
 
     def tokenize(self, text: str) -> list:
-        ru_tokenized = word_tokenize(text, language='russian')
+        ru_tokenized = ToktokTokenizer().tokenize(text)
         return self._weld_apostrophes(ru_tokenized)
+
+    @staticmethod
+    def detokenize(tokens: list) -> str:
+        return TreebankWordDetokenizer().detokenize(tokens)
 
 
 def get_tokenizer(lang: str) -> 'Tokenizer':
