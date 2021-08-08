@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from numberize.linguists import EnLinguist, RuLinguist, UkLinguist
+
 
 class Replacer(ABC):
     @abstractmethod
@@ -59,13 +61,13 @@ class EnReplacer(Replacer):
                 current_numeral += (number, )
                 continue
             if current_numeral:
-                new_tokens += [self.calculate(current_numeral), tok]
+                new_tokens += [str(self.calculate(current_numeral)), tok]
                 current_numeral = ()
                 continue
             new_tokens += [tok]
         else:
             if current_numeral:
-                new_tokens += [self.calculate(current_numeral)]
+                new_tokens += [str(self.calculate(current_numeral))]
         return new_tokens
 
 
@@ -78,4 +80,15 @@ class UkReplacer(Replacer):
 
 
 def get_replacer(lang):
-    pass
+
+    replacers = {
+        'ru': RuReplacer,
+        'uk': UkReplacer,
+        'en': EnReplacer(EnLinguist)
+    }
+
+    if lang not in replacers:
+        raise RuntimeError(
+            f'Language is not supported. Use one of these: {replacers.keys()}'
+        )
+    return replacers[lang]
