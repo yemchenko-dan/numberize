@@ -25,7 +25,31 @@ class EnReplacer(Replacer):
 
     @staticmethod
     def calculate(numeral: tuple) -> int:
-        pass
+        res, h_group, m_group = 0, 0, 0
+        for num in numeral:
+            if num == 100:
+                if h_group != 0:
+                    m_group += h_group * num
+                    h_group = 0
+                    continue
+                m_group += num
+            if num in (1000, 1000000, 1000000000):
+                if h_group and m_group:
+                    res += (h_group + m_group) * num
+                    h_group, m_group = 0, 0
+                elif h_group:
+                    res += h_group * num
+                    h_group = 0
+                elif m_group:
+                    res += m_group * num
+                    m_group = 0
+                else:
+                    res += num
+                continue
+            h_group += num
+        else:
+            res += m_group + h_group
+        return int(res)
 
     def replace(self, tokens: list) -> list:
         new_tokens, current_numeral = [], ()
