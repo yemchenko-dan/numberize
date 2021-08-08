@@ -1,9 +1,11 @@
 import tokenizers
+import replacers
 
 
 class Numberizer:
     def __init__(self, lang: str = 'ru'):
         self.tokenizer = tokenizers.get_tokenizer(lang)
+        self.replacer = replacers.get_replacer(lang)
 
     def replace_numerals(self, text: str) -> list:
         tokenized = self.tokenizer.tokenize(text)
