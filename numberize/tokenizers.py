@@ -51,7 +51,7 @@ class UkTokenizer(Tokenizer):
         return new_tokens
 
     def tokenize(self, text: str) -> list:
-        ru_tokenized = RuTokenizer.tokenize(text)
+        ru_tokenized = word_tokenize(text, language='russian')
         return self._weld_apostrophes(ru_tokenized)
 
 
