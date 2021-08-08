@@ -1,22 +1,5 @@
-import tokenizers
-import replacers
-
-
-class Numberizer:
-    def __init__(self, lang: str = 'ru'):
-        self.tokenizer = tokenizers.get_tokenizer(lang)
-        self.replacer = replacers.get_replacer(lang)
-
-    def replace_numerals(self, text: str) -> list:
-        tokenized = self.tokenizer.tokenize(text)
-        return tokenized
-
-
-numba = Numberizer('uk')
-print(
-    numba.replace_numerals(
-        """
-        Мені тринадцятий минало.
+uk = """
+Мені тринадцятий минало.
 
 Я пас ягнята за селом.
 
@@ -117,6 +100,23 @@ print(
 Не був би в світі юродивим.
 
 Людей і [Бога] не прокляв!
-        """
-    )
-)
+"""
+
+en = """
+Note the use of more than one conjunction "and" in large numbers in British
+English: two million six hundred and twenty-five thousand three hundred and
+ten (2,625,310).
+In American English, the conjunction "and" is generally not used before tens
+or ones: one hundred twenty-three (123);
+four hundred seven (407); three thousand five hundred thirty-eight (3,538);
+seventy-three thousand five (73,005);
+two million six hundred twenty-five thousand three hundred ten (2,625,310);
+five million three hundred thousand fifty (5,300,050).
+
+
+In British English, the conjunction "and" is also used before tens or ones
+in ordinal numerals above one hundred:
+one hundred and tenth (110th); three thousand and fifth (3005th).
+But "and" is not used in American ordinals:
+one hundred tenth (110th); three thousand fifth (3005th).
+"""
