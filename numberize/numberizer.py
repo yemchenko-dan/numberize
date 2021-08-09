@@ -1,9 +1,5 @@
-from time import perf_counter_ns
-
 from numberize import tokenizers
 from numberize import replacers
-
-from tests import texts
 
 
 class Numberizer:
@@ -15,13 +11,3 @@ class Numberizer:
         tokenized = self.tokenizer.tokenize(text)
         replaced = self.replacer.replace(tokenized)
         return self.tokenizer.detokenize(replaced)
-
-
-tic = perf_counter_ns()
-
-numba = Numberizer('en')
-print(
-    numba.replace_numerals(texts.en)
-)
-toc = perf_counter_ns()
-print((toc-tic)/1E9)
