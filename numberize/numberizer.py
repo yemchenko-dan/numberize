@@ -14,14 +14,14 @@ class Numberizer:
     def replace_numerals(self, text: str) -> str:
         tokenized = self.tokenizer.tokenize(text)
         replaced = self.replacer.replace(tokenized)
-        return self.tokenizer.detokenize(tokenized)
+        return self.tokenizer.detokenize(replaced)
 
 
 tic = perf_counter_ns()
 
-numba = Numberizer('uk')
+numba = Numberizer('en')
 print(
-    numba.replace_numerals(texts.uk)
+    numba.replace_numerals(texts.en)
 )
 toc = perf_counter_ns()
 print((toc-tic)/1E6)
