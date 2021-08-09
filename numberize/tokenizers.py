@@ -33,17 +33,21 @@ class RuTokenizer(Tokenizer):
 
     @staticmethod
     def detokenize(tokens: list) -> str:
-        pass
+        return TreebankWordDetokenizer().detokenize(tokens)
 
 
 class UkTokenizer(Tokenizer):
     @staticmethod
     def _is_ukrainian(word: str) -> bool:
         allowed = {
-            "а", "б", "в", "г", "д", "е", "є", "ж", "з", "і", "й", "к", "л",
-            "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш",
-            "щ", "ї", "ь", "я", "ю", "ж", "ґ", "-", "'", "’"
+            "а", "б", "в", "г", "д", "е", "є", "ж", "з", "і", "и", "й", "к",
+            "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч",
+            "ш", "щ", "ї", "ь", "я", "ю", "ж", "ґ", "-", "'", "’"
         }
+        # TokTokTokenizer sometimes doesn't tokenize points in cyrillic text
+        # E.g. ["дев", "'", "ятсот."]
+        if word[-1] == '.' and len(word) > 3:
+            word = word[:-1]
         return set(word) <= allowed
 
     def _weld_apostrophes(self, tokens: list) -> list:
@@ -57,6 +61,7 @@ class UkTokenizer(Tokenizer):
                 next_tok = tokens[i+1]
                 if self._is_ukrainian(prev_tok) \
                         and self._is_ukrainian(next_tok):
+                    new_tokens.pop()
                     new_tokens += [''.join([prev_tok, tok, next_tok])]
                     i += 2
                     continue

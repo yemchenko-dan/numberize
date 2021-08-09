@@ -37,6 +37,8 @@ class RuLinguist(Linguist):
         self.analyzer = morph
 
     def get_number(self, token: str):
+        if token[-1] == '.' and len(token) > 3:
+            token = token[:-1]
         for form in self.analyzer.normal_forms(token):
             number = dawgs.ru_nums.get(form)
             if number:
@@ -48,6 +50,8 @@ class UkLinguist(Linguist):
         self.analyzer = morph
 
     def get_number(self, token: str):
+        if token[-1] == '.' and len(token) > 3:  # TokTokTokenizer sometimes
+            token = token[:-1]              # doesn't tokenize points "тисяча."
         for form in self.analyzer.normal_forms(token):
             number = dawgs.uk_nums.get(form)
             if number:
