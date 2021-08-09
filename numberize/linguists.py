@@ -33,10 +33,22 @@ class EnLinguist(Linguist):
 
 
 class RuLinguist(Linguist):
+    def __init__(self, morph):
+        self.analyzer = morph
+
     def get_number(self, token: str):
-        pass
+        for form in self.analyzer.normal_forms(token):
+            number = dawgs.ru_nums.get(form)
+            if number:
+                return number
 
 
 class UkLinguist(Linguist):
+    def __init__(self, morph):
+        self.analyzer = morph
+
     def get_number(self, token: str):
-        pass
+        for form in self.analyzer.normal_forms(token):
+            number = dawgs.uk_nums.get(form)
+            if number:
+                return number
