@@ -3,7 +3,7 @@ from time import perf_counter_ns
 from numberize import tokenizers
 from numberize import replacers
 
-from numberize import texts
+from tests import texts
 
 
 class Numberizer:
@@ -24,4 +24,4 @@ print(
     numba.replace_numerals(texts.en)
 )
 toc = perf_counter_ns()
-print((toc-tic)/1E6)
+print((toc-tic)/1E9)
