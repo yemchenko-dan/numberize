@@ -16,7 +16,7 @@ Consider checking out [Wiki](https://github.com/DanATW/numberize/wiki) for more 
 ## How to install requirements?
 After installing this package
 
-```python3 -m nltk.downloader punkt```
+```python -m nltk.downloader punkt```
 
 ## How to use it?
 ```
