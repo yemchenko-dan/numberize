@@ -10,10 +10,14 @@ Consider checking out [Wiki](https://github.com/DanATW/numberize/wiki) for more 
 * python 3.6+
 * NLTK Data
 
-## How to install requirements?
-```python -m nltk.downloader punkt```
 ## How to install it?
 ```pip install numberize```
+
+## How to install requirements?
+After installing this package
+
+```python3 -m nltk.downloader punkt```
+
 ## How to use it?
 ```
 import numberize
