@@ -4,6 +4,7 @@ requires = [
     "wheel",
     "pymorhy2[fast]",
     "pymorphy2-dicts-uk",
-    "nltk"
+    "nltk",
+    "DAWG"
 ]
 build-backend = "setuptools.build_meta"
