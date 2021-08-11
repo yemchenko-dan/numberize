@@ -26,7 +26,7 @@ setuptools.setup(
         'numberize.dicts'
     ],
     python_requires=">=3.6",
-    install_requires=['pymorphy2[fast]', 'pymorphy2-dicts-uk', 'nltk'],
+    install_requires=['pymorphy2[fast]', 'pymorphy2-dicts-uk', 'nltk', 'DAWG'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest==6.2.4'],
     test_suite='tests'
