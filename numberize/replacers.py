@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 
 from pymorphy2 import MorphAnalyzer
 
-from numberize.linguists import EnLinguist, RuLinguist, UkLinguist
 from numberize.calculators import AmericanEnCalculator, CyrillicCalculator
+from numberize.linguists import EnLinguist, RuLinguist, UkLinguist
 
 
 class Replacer(ABC):

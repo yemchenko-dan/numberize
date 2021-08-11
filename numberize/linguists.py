@@ -18,6 +18,7 @@ class Linguist(ABC):
 class EnLinguist(Linguist):
     @staticmethod
     def get_number(token: str):
+        token = token.lower()
         if '-' in token:
             parts = token.split('-')
             if len(parts) != 2:
@@ -37,6 +38,7 @@ class RuLinguist(Linguist):
         self.analyzer = morph
 
     def get_number(self, token: str):
+        token = token.lower()
         if token[-1] == '.' and len(token) > 3:
             token = token[:-1]
         for form in self.analyzer.normal_forms(token):
@@ -50,6 +52,7 @@ class UkLinguist(Linguist):
         self.analyzer = morph
 
     def get_number(self, token: str):
+        token = token.lower()
         if token[-1] == '.' and len(token) > 3:  # TokTokTokenizer sometimes
             token = token[:-1]              # doesn't tokenize points "тисяча."
         for form in self.analyzer.normal_forms(token):
