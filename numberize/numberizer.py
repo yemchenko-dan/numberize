@@ -8,6 +8,7 @@ class Numberizer:
         self.replacer = replacers.get_replacer(lang)
 
     def replace_numerals(self, text: str) -> str:
+        """Replaces numerals in text. Doesn't save indentation."""
         tokenized = self.tokenizer.tokenize(text)
         replaced = self.replacer.replace(tokenized)
         return self.tokenizer.detokenize(replaced)
