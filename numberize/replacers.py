@@ -2,14 +2,19 @@ from abc import ABC, abstractmethod
 
 from pymorphy2 import MorphAnalyzer
 
-from numberize.calculators import AmericanEnCalculator, CyrillicCalculator
-from numberize.linguists import EnLinguist, RuLinguist, UkLinguist
+from numberize.calculators import (
+    Calculator, AmericanEnCalculator, CyrillicCalculator
+)
+from numberize.linguists import Linguist, EnLinguist, RuLinguist, UkLinguist
 
 
 class Replacer(ABC):
     @abstractmethod
-    def __init__(self, linguist):
-        """"""
+    def __init__(self, linguist: 'Linguist', calculator: 'Calculator'):
+        """
+        :param linguist: Linguist to convert numeral tokens to numbers
+        :param calculator: Calculator to end result
+        """
 
     @abstractmethod
     def calculate(self, numeral: tuple) -> str:
@@ -24,7 +29,7 @@ class Replacer(ABC):
 
 
 class BasicReplacer(Replacer):
-    def __init__(self, linguist, calculator):
+    def __init__(self, linguist: 'Linguist', calculator: 'Calculator'):
         self.linguist = linguist
         self.calculator = calculator
 
@@ -49,7 +54,7 @@ class BasicReplacer(Replacer):
         return new_tokens
 
 
-def get_replacer(lang):
+def get_replacer(lang: str) -> 'BasicReplacer':
 
     replacers = {
         'ru': BasicReplacer(
