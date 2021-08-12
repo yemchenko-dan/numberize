@@ -16,6 +16,15 @@ RU_DATA = [
     ("тысячи", 1000), ("сто", 100), ("п'яти", None), ("дваДцати.", 20)
 ]
 
+UK_DATA = [
+    ("п'яти.", 5), ("ста", 100), ("five", None), ("пяти", None),
+    ("сімох", 7), ("ТисЯчі", 1000), ("Ти сячі", None),
+    ("мільйона", 1000000)
+]
+
+ru_morph = pymorphy2.MorphAnalyzer(result_type=None)
+uk_morph = pymorphy2.MorphAnalyzer(lang="uk", result_type=None)
+
 
 @pytest.mark.parametrize("token,expected_output", EN_DATA)
 def test_en_linguist(token, expected_output):
@@ -25,5 +34,11 @@ def test_en_linguist(token, expected_output):
 
 @pytest.mark.parametrize("token,expected_output", RU_DATA)
 def test_ru_linguist(token, expected_output):
-    ling = linguists.RuLinguist(pymorphy2.MorphAnalyzer())
+    ling = linguists.RuLinguist(ru_morph)
+    assert ling.get_number(token) == expected_output
+
+
+@pytest.mark.parametrize("token,expected_output", UK_DATA)
+def test_uk_linguist(token, expected_output):
+    ling = linguists.UkLinguist(uk_morph)
     assert ling.get_number(token) == expected_output
