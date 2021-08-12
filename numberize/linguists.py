@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
+from typing import Optional
+
+import pymorphy2
 
 import numberize.dawgs as dawgs
 
@@ -6,7 +9,7 @@ import numberize.dawgs as dawgs
 class Linguist(ABC):
     @staticmethod
     @abstractmethod
-    def get_number(token: str):
+    def get_number(token: str) -> Optional[int]:
         """
         E.g. 'two' -> 2, 'twenty-five' -> 25, "п'ять" -> 5, "миллион" -> 1E6
         'horse' -> None
@@ -17,7 +20,7 @@ class Linguist(ABC):
 
 class EnLinguist(Linguist):
     @staticmethod
-    def get_number(token: str):
+    def get_number(token: str) -> Optional[int]:
         token = token.lower()
         if '-' in token:
             parts = token.split('-')
@@ -34,10 +37,13 @@ class EnLinguist(Linguist):
 
 
 class RuLinguist(Linguist):
-    def __init__(self, morph):
+    def __init__(self, morph: 'pymorphy2.MorphAnalyzer'):
+        """
+        :param morph: MorphAnalyzer to normalize words
+        """
         self.analyzer = morph
 
-    def get_number(self, token: str):
+    def get_number(self, token: str) -> Optional[int]:
         token = token.lower()
         if token[-1] == '.' and len(token) > 3:
             token = token[:-1]
@@ -48,10 +54,13 @@ class RuLinguist(Linguist):
 
 
 class UkLinguist(Linguist):
-    def __init__(self, morph):
+    def __init__(self, morph: 'pymorphy2.MorphAnalyzer'):
+        """
+        :param morph: MorphAnalyzer to normalize words
+        """
         self.analyzer = morph
 
-    def get_number(self, token: str):
+    def get_number(self, token: str) -> Optional[int]:
         token = token.lower()
         if token[-1] == '.' and len(token) > 3:  # TokTokTokenizer sometimes
             token = token[:-1]              # doesn't tokenize points "тисяча."
