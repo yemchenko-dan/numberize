@@ -22,7 +22,8 @@ class AmericanEnCalculator(Calculator):
                     h_group = 0
                     continue
                 m_group += num
-            if num in (1000, 1000000, 1000000000):
+                continue
+            if num >= 1000:
                 if h_group and m_group:
                     res += (h_group + m_group) * num
                     h_group, m_group = 0, 0
@@ -57,3 +58,8 @@ class CyrillicCalculator(Calculator):
         else:
             res += group
         return str(int(res))
+
+
+print(
+    AmericanEnCalculator().calculate((100,))
+    )
