@@ -58,8 +58,3 @@ class CyrillicCalculator(Calculator):
         else:
             res += group
         return str(int(res))
-
-
-print(
-    AmericanEnCalculator().calculate((100,))
-    )
