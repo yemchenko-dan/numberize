@@ -10,7 +10,7 @@ EN_DATA = [
     ("hundred", '100'),
     ("hundreds of thousands", "hundreds of thousands"),
     ("five-nine", "five-nine"),
-    ("'two miLlion' - that's a number.", "'2000000' - that's a number."),
+    ("'two million' - that's a number.", "'2000000' - that's a number."),
     (
         """
     Note the use of more than one conjunction "and" in large numbers in British
@@ -51,6 +51,8 @@ EN_DATA = [
     )
 ]
 
+RU_DATA = [("20 миллиардов долларов", "20 1000000000 долларов")]
+
 en_numberizer = numberizer.Numberizer('en')
 ru_numberizer = numberizer.Numberizer('ru')
 uk_numberizer = numberizer.Numberizer('uk')
@@ -63,8 +65,11 @@ def test_replace_numerals_en(text, expected_output):
     assert ans == exp
 
 
-# def test_replace_numerals_ru():
-#     pass
+@pytest.mark.parametrize("text,expected_output", RU_DATA)
+def test_replace_numerals_ru(text, expected_output):
+    ans = ''.join(ru_numberizer.replace_numerals(text).split())
+    exp = ''.join(expected_output.split())
+    assert ans == exp
 
 
 # def test_replace_numerals_uk():
