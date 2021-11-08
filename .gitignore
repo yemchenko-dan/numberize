@@ -1,2 +1,6 @@
 venv/*
 .idea/*
+.eggs/*
+numberize/__pycache__/*
+numberize/dicts/__pycache__/*
+
