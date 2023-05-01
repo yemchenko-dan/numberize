@@ -2,8 +2,8 @@
 requires = [
     "setuptools>=42",
     "wheel",
-    "pymorhy2[fast]",
-    "pymorphy2-dicts-uk",
+    "pymorhy3",
+    "pymorphy3-dicts-uk",
     "nltk"
 ]
 build-backend = "setuptools.build_meta"

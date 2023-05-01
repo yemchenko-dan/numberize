@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="numberize",
-    version="1.0.3",
+    version="1.1.2",
     author="YemchenkoDS",
     author_email="emchenko@dlit.dp.ua",
     description="Replace numerals with numbers",
@@ -26,7 +26,7 @@ setuptools.setup(
         'numberize.dicts'
     ],
     python_requires=">=3.6",
-    install_requires=['pymorphy2[fast]', 'pymorphy2-dicts-uk', 'nltk'],
+    install_requires=['pymorphy3', 'pymorphy3-dicts-uk', 'nltk'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest==6.2.4'],
     test_suite='tests'

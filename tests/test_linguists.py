@@ -1,6 +1,6 @@
 import pytest
 
-import pymorphy2
+import pymorphy3
 
 import numberize.linguists as linguists
 
@@ -22,8 +22,8 @@ UK_DATA = [
     ("мільйона", 1000000)
 ]
 
-ru_morph = pymorphy2.MorphAnalyzer(result_type=None)
-uk_morph = pymorphy2.MorphAnalyzer(lang="uk", result_type=None)
+ru_morph = pymorphy3.MorphAnalyzer(result_type=None)
+uk_morph = pymorphy3.MorphAnalyzer(lang="uk", result_type=None)
 
 
 @pytest.mark.parametrize("token,expected_output", EN_DATA)

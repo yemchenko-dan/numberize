@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-import pymorphy2
+import pymorphy3
 
 import numberize.dicts as dicts
 
@@ -37,7 +37,7 @@ class EnLinguist(Linguist):
 
 
 class RuLinguist(Linguist):
-    def __init__(self, morph: 'pymorphy2.MorphAnalyzer'):
+    def __init__(self, morph: 'pymorphy3.MorphAnalyzer'):
         """
         :param morph: MorphAnalyzer to normalize words
         """
@@ -54,7 +54,7 @@ class RuLinguist(Linguist):
 
 
 class UkLinguist(Linguist):
-    def __init__(self, morph: 'pymorphy2.MorphAnalyzer'):
+    def __init__(self, morph: 'pymorphy3.MorphAnalyzer'):
         """
         :param morph: MorphAnalyzer to normalize words
         """

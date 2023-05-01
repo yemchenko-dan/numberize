@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from pymorphy2 import MorphAnalyzer
+from pymorphy3 import MorphAnalyzer
 
 from numberize.calculators import (
     Calculator, AmericanEnCalculator, CyrillicCalculator
