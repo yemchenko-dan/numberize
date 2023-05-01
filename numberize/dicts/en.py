@@ -1,11 +1,10 @@
-en_nums = [
-    (u"one", 1), (u"two", 2), (u"three", 3), (u"four", 4), (u"five", 5),
-    (u"six", 6), (u"seven", 7), (u"eight", 8), (u"nine", 9),
-    (u"ten", 10), (u"eleven", 11), (u"twelve", 12),
-    (u"thirteen", 13), (u"fourteen", 14), (u"fifteen", 15),
-    (u"sixteen", 16), (u"seventeen", 17), (u"eighteen", 18),
-    (u"nineteen", 19), (u"twenty", 20), (u"thirty", 30),
-    (u"forty", 40), (u"fifty", 50), (u"sixty", 60),
-    (u"seventy", 70), (u"eighty", 80), (u"ninety", 90), (u"hundred", 100),
-    (u"thousand", 1000), (u"million", 1000000), (u"billion", 1000000000),
-]
+nums = {
+    'one': 1, 'two': 2, 'three': 3, 'four': 4,
+    'five': 5, 'six': 6, 'seven': 7, 'eight': 8,
+    'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
+    'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
+    'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
+    'thirty': 30, 'forty': 40, 'fifty': 50, 'sixty': 60,
+    'seventy': 70, 'eighty': 80, 'ninety': 90, 'hundred': 100,
+    'thousand': 1000, 'million': 1000000, 'billion': 1000000000,
+}

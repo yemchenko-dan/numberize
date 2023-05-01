@@ -3,7 +3,7 @@ from typing import Optional
 
 import pymorphy2
 
-import numberize.dawgs as dawgs
+import numberize.dicts as dicts
 
 
 class Linguist(ABC):
@@ -26,14 +26,14 @@ class EnLinguist(Linguist):
             parts = token.split('-')
             if len(parts) != 2:
                 return
-            left = dawgs.en_nums.get(parts[0])
+            left = dicts.en.nums.get(parts[0])
             if not left or left < 20 or left > 90:
                 return
-            right = dawgs.en_nums.get(parts[1])
+            right = dicts.en.nums.get(parts[1])
             if not right or right > 9 or right < 1:
                 return
             return left + right
-        return dawgs.en_nums.get(token)
+        return dicts.en.nums.get(token)
 
 
 class RuLinguist(Linguist):
@@ -48,7 +48,7 @@ class RuLinguist(Linguist):
         if token[-1] == '.' and len(token) > 3:
             token = token[:-1]
         for form in self.analyzer.normal_forms(token):
-            number = dawgs.ru_nums.get(form)
+            number = dicts.ru.nums.get(form)
             if number:
                 return number
 
@@ -65,6 +65,6 @@ class UkLinguist(Linguist):
         if token[-1] == '.' and len(token) > 3:  # TokTokTokenizer sometimes
             token = token[:-1]              # doesn't tokenize points "тисяча."
         for form in self.analyzer.normal_forms(token):
-            number = dawgs.uk_nums.get(form)
+            number = dicts.uk.nums.get(form)
             if number:
                 return number
